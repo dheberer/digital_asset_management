@@ -1,3 +1,5 @@
+#!bin/python3
+
 from plex_utils import rate_movie_in_library
 import csv
 
@@ -10,7 +12,7 @@ def lb_ratings_as_list(filename:str):
 
 if __name__ == "__main__":
     ratings = lb_ratings_as_list('ratings.csv')
-    for r in ratings[:10]:
+    for r in ratings:
         if rate_movie_in_library(r['Name'], int(r['Year']), float(r['Rating']) * 2):
             print('***  ' + r['Name'] + '  ' + r['Year'])
         else:
