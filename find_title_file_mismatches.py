@@ -35,8 +35,12 @@ def _fetch_mp4_title_year(file_path):
 
 def _update_mp4_title_year(file_path, new_title, new_year):
     # Load the MP4 file
-    video = MP4(file_path)
-
+    try:
+        video = MP4(file_path)
+    except:
+        print(f"Failed to update file {file_path}, tags cause a throw on load.")
+        return 
+        
     # Access tags
     tags = video.tags
     if tags is None:
@@ -53,75 +57,75 @@ def _update_mp4_title_year(file_path, new_title, new_year):
     print(f"{ts} Updated file '{file_path}' metadata with title '{new_title}' and year '{new_year}.'")
 
 if __name__ == "__main__":
-    
-    SLICE_START = 500
-    SLICE_END = SLICE_START + 200
 
-    print(f"Running movie title scanner with slice start {SLICE_START} and slice end {SLICE_END}")
+    print(f"{datetime.datetime.now()} Running movie title scanner")
     print('Fetching the movies from the plex server, this could take some time.')
     movies = fetch_movie_infos_from_library(PLEX_LIBRARY_NAME)
     tags_to_do = []
     plex_titles_to_do = []
 
-    for movie in movies[SLICE_START:SLICE_END]:
+    for movie in movies:
         sleep(.1)
         tmdb_entry = fetch_movie_from_tmdb(movie['title'], movie['year'])
         if tmdb_entry:
             # If the movie fetch gets something, we just mark it for tag update
 
             if movie['title'] == tmdb_entry['title'] and movie['year'] == int(tmdb_entry['release_date'][:4]):
-                print(f"[MATCH] -- {movie['title']} ({movie['year']})")            
+                # print(f"[MATCH] -- {movie['title']} ({movie['year']})")
+                pass
             else:
                 print(f"\n[PLEX] -- {movie['title']} ({movie['year']})")
                 print(f"[TMDB] -- {tmdb_entry['title']} ({tmdb_entry['release_date'][:4]})\n")
-            
-            tags_to_do.append({
-                'title': tmdb_entry['title'],
-                'year': tmdb_entry['release_date'][:4],
-                'file_path': movie['filename']
-            })
+
+            # tags_to_do.append({
+            #     'title': tmdb_entry['title'],
+            #     'year': tmdb_entry['release_date'][:4],
+            #     'file_path': movie['filename']
+            # })
 
         else:
-            print(f"\n[FAIL] -- {movie['title']} ({movie['year']}) not matched in TMDB")
+            # print(f"\n[FAIL] -- {movie['title']} ({movie['year']}) not matched in TMDB")
             movie_info = _filename_to_movie(movie['filename'])
             if movie_info:
                 tmdb_entry = fetch_movie_from_tmdb(movie_info['title'], movie_info['year'])
                 if tmdb_entry:
-                    print("[FILE] -- Filename matched a movie in TMDB.")
-
-                    tags_to_do.append({
-                        'title': tmdb_entry['title'],
-                        'year': tmdb_entry['release_date'][:4],
-                        'file_path': movie_info['filename']
-                    })
-                    plex_titles_to_do.append({
-                        # 'title': tmdb_entry['title'],
-                        # 'year': tmdb_entry['release_date'][:4],
-                        'plex_title': movie['title'],
-                        'plex_year': movie['year']
-                    })
+                    # print("[FILE] -- Filename matched a movie in TMDB.")
+                    pass
+                    # tags_to_do.append({
+                    #     'title': tmdb_entry['title'],
+                    #     'year': tmdb_entry['release_date'][:4],
+                    #     'file_path': movie_info['filename']
+                    # })
+                    if movie['title'] and movie['year']:
+                        # plex_titles_to_do.append({
+                        #     'plex_title': movie['title'],
+                        #     'plex_year': movie['year']
+                        # })
+                        pass
+                    else:
+                        print(f"[PLEX!] -- there is malformed data coming from plex {movie}")
                 else:
                     print("!!!"*10)
                     print(f"[FAIL] -- Filename '{movie['filename']}' not matched in TMDB either.\n")
                     # TODO: output the list of misfits somewhere so they can be handled special case
-    
+
     # fix all tags that don't already match a TMDB entry
-    for ttd in tags_to_do:
-        tag_title, tag_year = _fetch_mp4_title_year(ttd['file_path'])
-        if tag_title != ttd['title'] or tag_year != ttd['year']:
-            print(f"Tags aren't matched on {ttd['file_path']}, setting them...")
-            _update_mp4_title_year(ttd['file_path'],  ttd['title'], ttd['year'])
+    # for ttd in tags_to_do:
+    #     tag_title, tag_year = _fetch_mp4_title_year(ttd['file_path'])
+    #     if tag_title != ttd['title'] or tag_year != ttd['year']:
+    #         print(f"Tags aren't matched on {ttd['file_path']}, setting them...")
+    #         _update_mp4_title_year(ttd['file_path'],  ttd['title'], ttd['year'])
 
     # if the plex movie name or year isn't matching, since we've updated the mp4 tags we can refresh
     # metadata and it will likely fix it.
-    lib = fetch_plex_library(PLEX_LIBRARY_NAME, 'movie')
-    if not lib:
-        print("Through some kind of magic, no plex library was found.")
-    else:
-        for pttd in plex_titles_to_do:
-            movie = fetch_plex_movie(pttd['plex_title'], pttd['plex_year'], lib)
-            if movie:
-                movie.refresh()
-                print(f"Refreshing the metadata for {pttd['plex_title']} ({pttd['plex_year']}).")
-            else:
-                print(f"Unable to find {pttd['plex_title']} ({pttd['plex_year']}) in plex.")
+    # lib = fetch_plex_library(PLEX_LIBRARY_NAME, 'movie')
+    # if not lib:
+    #     print("Through some kind of magic, no plex library was found.")
+    # else:
+    #     for pttd in plex_titles_to_do:
+    #         movie = fetch_plex_movie(pttd['plex_title'], pttd['plex_year'], lib)
+    #         if movie:
+    #             movie.refresh()
+    #             print(f"Refreshing the metadata for {pttd['plex_title']} ({pttd['plex_year']}).")
+    #         else:
+    #             print(f"Unable to find {pttd['plex_title']} ({pttd['plex_year']}) in plex.")
