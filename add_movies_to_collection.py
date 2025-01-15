@@ -1,4 +1,4 @@
-#!bin/python3
+#!.venv/bin/python
 # This script will open a csv file (passed in on cli) that has movie titles and years and then
 # add each movie to a collection that matches the name of the file.
 
@@ -10,8 +10,9 @@ from plex_utils import fetch_plex_library, fetch_plex_movie
 if __name__ == "__main__":
     LIB_NAME = 'Movies'
     COLLECTIONS = [
-        { 'collection_name': '1001 Movies To See Before You Die', 'file_path': '/media/nas/projects/dam/1001_movies.txt' },
-        { 'collection_name': 'Best Picture Winners', 'file_path': '/media/nas/projects/dam/best_picture_winners.txt' }
+        { 'collection_name': '1001 Movies To See Before You Die', 'file_path': '/media/nas/projects/dam/plex_collections/1001_movies.txt' },
+        { 'collection_name': 'Best Picture Winners', 'file_path': '/media/nas/projects/dam/plex_collections/best_picture_winners.txt' },
+        { 'collection_name': 'Disney Movies', 'file_path': '/media/nas/projects/dam/plex_collections/disney_movies.txt'}
     ]
     print(f"Fetching all movies from the plex library {LIB_NAME}")
     plex_lib = fetch_plex_library(LIB_NAME)
