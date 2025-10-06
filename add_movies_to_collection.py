@@ -12,7 +12,11 @@ if __name__ == "__main__":
     COLLECTIONS = [
         { 'collection_name': '1001 Movies To See Before You Die', 'file_path': '/media/nas/projects/dam/plex_collections/1001_movies.txt' },
         { 'collection_name': 'Best Picture Winners', 'file_path': '/media/nas/projects/dam/plex_collections/best_picture_winners.txt' },
-        { 'collection_name': 'Disney Movies', 'file_path': '/media/nas/projects/dam/plex_collections/disney_movies.txt'}
+        { 'collection_name': 'Disney Movies', 'file_path': '/media/nas/projects/dam/plex_collections/disney_movies.txt'},
+        { 'collection_name': 'Best of the Aughts', 'file_path': '/media/nas/projects/dam/plex_collections/aughts_100.txt'},
+        { 'collection_name': 'Best of the Eighties', 'file_path': '/media/nas/projects/dam/plex_collections/80s_100.txt'},
+        { 'collection_name': 'Best of the Nineties', 'file_path': '/media/nas/projects/dam/plex_collections/90s_200.txt'},
+        { 'collection_name': 'Top Shelf Horror', 'file_path': '/media/nas/projects/dam/plex_collections/horror_200.txt'},
     ]
     print(f"Fetching all movies from the plex library {LIB_NAME}")
     plex_lib = fetch_plex_library(LIB_NAME)
@@ -28,6 +32,7 @@ if __name__ == "__main__":
         # should be a list with title and string as it's two members
         for l in lines:
             if len(l) != 2:
+                print('\t'.join(l))
                 continue
             title = l[0].strip()
             year = l[1].strip()
@@ -35,7 +40,7 @@ if __name__ == "__main__":
             if movie and collection_name not in [c.tag for c in movie.collections]:
                 movie.addCollection(collection_name)
             else:
-                if not movie:
+                if not movie and not title.startswith('SEEN'):
                     print(f"{title} ({year})")
 
         print('\n\n')

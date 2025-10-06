@@ -1,5 +1,5 @@
 Les Vampires	1915
-Intolerance	1916
+SEEN Intolerance 1916
 The Cabinet of Dr. Caligari	1920
 Broken Blossoms	1919
 Within Our Gates	1920
@@ -53,7 +53,7 @@ Earth	1930
 Freedom for Us	1931
 Limite	1931
 Tabu	1931
-City Lights	1931
+SEEN City Lights	1931
 Dracula	1931
 Frankenstein	1931
 The Public Enemy	1931
@@ -368,7 +368,7 @@ The Hole	1960
 Rocco and his Brothers	1960
 The Adventure	1960
 Breathless	1960
-Spartacus	1960
+SEEN Spartacus	1960
 The Apartment	1960
 The Housemaid	1960
 The Cloud-Capped Star	1960
@@ -407,7 +407,7 @@ The Exterminating Angel	1962
 Jules and Jim	1962
 The Manchurian Candidate	1962
 What Ever Happened to Baby Jane?	1962
-8 1/2	1963
+8½	1963
 The Birds	1963
 Passenger	1963
 The Servant	1963
@@ -684,7 +684,7 @@ Atlantic City 	1980
 The Last Metro 	1980
 The Shining 	1980
 The Elephant Man 	1980
-The Big Red One 	1980
+SEEN The Big Red One 	1980
 Loulou 	1980
 Raging Bull 	1980
 Airplane! 	1980
@@ -790,7 +790,7 @@ A Chinese Ghost Story 	1987
 Full Metal Jacket 	1987
 Broadcast News 	1987
 Babette's Feast 	1987
-Good Morning, Vietnam 	1987
+SEEN Good Morning, Vietnam 	1987
 Moonstruck 	1987
 Wall Street 	1987
 The Untouchables 	1987
@@ -836,7 +836,7 @@ Drugstore Cowboy 	1989
 The Asthenic Syndrome 	1989
 Do the Right Thing 	1989
 The Unbelievable Truth 	1989
-Roger & Me 	1989
+SEEN    Roger & Me 	1989
 Sex, Lies, and Videotape 	1989
 A City of Sadness 	1989
 Say Anything 	1989
@@ -859,7 +859,7 @@ La Belle Noiseuse 	1991
 The Rapture 	1991
 A Brighter Summer Day 	1991
 JFK 	1991
-Slacker 	1991
+Slacker 	1990
 Once Upon a Time in China 	1991
 Thelma & Louise 	1991
 My Own Private Idaho 	1991
@@ -897,7 +897,7 @@ The Wedding Banquet 	1993
 Thirty Two Short Films About Glenn Gould 	1993
 Jurassic Park 	1993
 The Age of Innocence 	1993
-The Lion King 	1994
+SEEN    The Lion King 	1994
 The Last Seduction 	1994
 The Wild Reeds 	1994
 Crumb 	1994
@@ -1074,7 +1074,7 @@ Tsotsi 	2005
 Brokeback Mountain 	2005
 Go, See, and Become 	2005
 Paradise Now 	2005
-Hidden 	2005
+Caché 	2005
 The Constant Gardener 	2005
 Pan's Labyrinth 	2006
 The Lives of Others 	2006
@@ -1104,7 +1104,7 @@ The Hurt Locker 	2008
 Slumdog Millionaire 	2008
 The Dark Knight 	2008
 Let the Right One In 	2008
-Wall-E 	2008
+SEEN    Wall-E 	2008
 The Good, the Bad, the Weird 	2008
 The Wrestler 	2008
 The Curious Case of Benjamin Button 	2008
@@ -1236,7 +1236,7 @@ Rocks 	2019
 Saint Maud 	2020
 Tenet 	2020
 Ma Rainey's Black Bottom 	2020
-Soul 	2020
+SEEN    Soul 	2020
 Never Rarely Sometimes Always 	2020
 Lovers Rock 	2020
 Nomadland 	2021
