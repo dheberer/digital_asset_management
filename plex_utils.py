@@ -121,6 +121,80 @@ def rate_movie_in_library(title:str, year:int, rating:float):
 
     return False
 
+def sync_ratings_to_plex(plex_movies: dict, lb_ratings: dict, dry_run: bool = False) -> dict:
+    """
+    Given a cache of Plex movies (from fetch_all_plex_movies) and a dict of
+    Letterboxd ratings keyed by (title_lower, year) with 0-5 star values,
+    rates each matching Plex movie on Plex's 0-10 scale.
+    If dry_run, prints what would be rated but doesn't call Plex.
+    Returns counts: synced, already_rated, not_in_plex, errors.
+    """
+    results = {'synced': 0, 'already_rated': 0, 'not_in_plex': 0, 'errors': 0}
+
+    for key, lb_rating in lb_ratings.items():
+        if lb_rating is None:
+            continue
+
+        plex_rating = lb_rating * 2
+        movie = plex_movies.get(key)
+        if not movie:
+            results['not_in_plex'] += 1
+            continue
+
+        if movie.userRating == plex_rating:
+            results['already_rated'] += 1
+            continue
+
+        if dry_run:
+            print(f"  WOULD RATE: {movie.title} ({movie.year}) -> {lb_rating} stars")
+            results['synced'] += 1
+            continue
+
+        try:
+            movie.rate(plex_rating)
+            print(f"  Rated: {movie.title} ({movie.year}) -> {lb_rating} stars")
+            results['synced'] += 1
+        except Exception as e:
+            print(f"  Error rating {key}: {e}")
+            results['errors'] += 1
+
+    return results
+
+def mark_reviewed_movies_watched(plex_movies: dict, lb_reviews: dict, dry_run: bool = False) -> dict:
+    """
+    Given a cache of Plex movies (from fetch_all_plex_movies) and a dict of
+    Letterboxd reviews keyed by (title_lower, year), marks each matching
+    Plex movie as watched.
+    If dry_run, prints what would be marked but doesn't call Plex.
+    Returns counts: marked, already_watched, not_in_plex, errors.
+    """
+    results = {'marked': 0, 'already_watched': 0, 'not_in_plex': 0, 'errors': 0}
+
+    for key in lb_reviews:
+        movie = plex_movies.get(key)
+        if not movie:
+            results['not_in_plex'] += 1
+            continue
+
+        if movie.isWatched:
+            results['already_watched'] += 1
+            continue
+
+        if dry_run:
+            print(f"  WOULD MARK WATCHED: {movie.title} ({movie.year})")
+            results['marked'] += 1
+            continue
+
+        try:
+            movie.markWatched()
+            print(f"  Marked watched: {movie.title} ({movie.year})")
+            results['marked'] += 1
+        except Exception as e:
+            print(f"  Error marking watched {key}: {e}")
+            results['errors'] += 1
+
+    return results
+
 def update_movie_title_year_in_library(plex_title: str, plex_year: int, new_title: str = '', new_year: int = 0) -> bool:
     movie_libraries = _fetch_libraries('movie')
     for lib in movie_libraries:

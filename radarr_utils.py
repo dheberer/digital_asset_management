@@ -205,6 +205,35 @@ def add_movie(title: str, year: int, root_folder: str = '/media/nas2/Movies',
         return (False, f"Unexpected response: {response.status_code}")
 
 
+def remove_movie(title: str, year: int, delete_files: bool = True, movie_cache: list = None,
+                  dry_run: bool = False):
+    """
+    Removes a movie from Radarr by title/year, optionally deleting its files
+    from disk as well. If dry_run, reports what would be removed but doesn't
+    call Radarr.
+    Returns a tuple of (success: bool, message: str).
+    """
+    existing = is_movie_in_radarr(title, year, movie_cache)
+    if not existing:
+        return (False, f"NOT IN RADARR: {title} ({year})")
+
+    if dry_run:
+        files_note = " (with files)" if delete_files else ""
+        return (True, f"WOULD REMOVE: {existing['title']} ({existing.get('year')}){files_note}")
+
+    response = requests.delete(
+        f"{RADARR_URL}/api/v3/movie/{existing['id']}",
+        headers=HEADERS,
+        params={'deleteFiles': str(delete_files).lower(), 'addImportExclusion': 'false'}
+    )
+
+    if response.status_code == 200:
+        invalidate_cache()
+        return (True, f"Removed: {existing['title']} ({existing.get('year')})")
+    else:
+        return (False, f"Failed to remove {title} ({year}): {response.status_code} {response.text}")
+
+
 def process_movie_list(movie_list: list, root_folder: str = '/media/nas2/Movies',
                        quality_profile: str = 'HD - 720p/1080p', search: bool = True):
     """

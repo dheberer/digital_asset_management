@@ -27,11 +27,25 @@ Repo-wide settings that aren't secrets (unlike `tokens.json`) live in `config.js
 Scripts intended to run on a schedule (via cron):
 
 ```
-# Unpack the latest manually-downloaded Letterboxd export into letterboxd_csv/
-0 2 * * * /media/nas/projects/dam/.venv/bin/python3 /media/nas/projects/dam/unpack_letterboxd_export.py
+# Unpack the latest manually-downloaded Letterboxd export and, if one was
+# found, sync ratings/watched status to Plex and remove deleted-tagged
+# movies from Radarr
+0 2 * * * /media/nas/projects/dam/.venv/bin/python3 /media/nas/projects/dam/process_letterboxd_export.py
 
 # Add movies to Plex collections based on plex_collections/*.txt
 30 2 * * * /media/nas/projects/dam/.venv/bin/python3 /media/nas/projects/dam/add_movies_to_collection.py
 ```
 
-`unpack_letterboxd_export.py` is a no-op (exit 0) if the export folder has no zip in it yet, so it's safe to run daily even between manual downloads.
+`process_letterboxd_export.py` is a no-op (exit 0) if the export folder has no zip in it yet. When it does find one, it unpacks it into `letterboxd_csv/` (overwriting the previous export) and then:
+
+- Syncs Letterboxd star ratings to Plex ratings
+- Marks every reviewed movie as watched in Plex
+- For movies tagged `deleted` in Letterboxd: marks them `SEEN` across `plex_collections/*.txt` and removes them, files included, from Radarr
+
+`unpack_letterboxd_export.py` still works standalone if you just want the CSV refresh without the sync/removal steps.
+
+Run with `--dry-run` to preview a pipeline run: the export is unpacked into a temp directory (leaving `letterboxd_csv/` untouched) and every step prints what it would do instead of updating Plex, editing collection files, or calling Radarr.
+
+```
+.venv/bin/python3 process_letterboxd_export.py --dry-run
+```
