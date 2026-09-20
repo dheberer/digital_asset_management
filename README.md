@@ -3,6 +3,13 @@ scripts to automate managing movies, music, pictures among various services
 
 This is not for real public consumption, but looking in the utils files might give you a nudge in how you can write your own scripts to help manage your media
 
+## Setup
+
+```
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+```
+
 ## Configuration
 
 Repo-wide settings that aren't secrets (unlike `tokens.json`) live in `config.json` at the repo root. Edit it in place rather than passing it around:
