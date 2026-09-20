@@ -42,7 +42,7 @@ if __name__ == "__main__":
     
     directory = sys.argv[1]
     mp4_files = find_mp4_files(directory)
-    
+    not_found = []
     if mp4_files:
         print(f"Found {len(mp4_files)} MP4 files:")
         for file in mp4_files:
@@ -53,7 +53,15 @@ if __name__ == "__main__":
 
             movie = fetch_movie_from_tmdb(title, year)
             rating = movie.get('vote_average', 0)
-            if  rating < 6.2:
-                print(str(rating) + '  ' + file)
+            if  rating < 5.6 and rating != 0:
+                print(f"{str(rating)}\trm \"{file}\"")
+            if rating == 0:
+                not_found.append(file)
     else:
         print(f"No MP4 files found in '{directory}'")
+
+    print("\n\nThese files weren't matched\n--------------------------------------------------\n")
+    for f in not_found:
+        print(f)
+
+

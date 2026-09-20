@@ -28,7 +28,7 @@ The Road to Wellville	1994
 Interview with the Vampire	1994
 Sleepers	1996
 Titanic	1997
-True Lies	1994
+SEEN True Lies 1994
 The Grifters	1990
 54	1998
 Pulp Fiction	1994
@@ -126,7 +126,7 @@ Air America	1990
 White Hunter Black Heart	1990
 The Client	1994
 Intersection	1994
-Disclosure	1994
+SEEN Disclosure 1994
 The Mask of Zorro	1998
 Most Wanted	1997
 Sweet and Lowdown	1999
@@ -185,7 +185,7 @@ Malice	1993
 Flawless	1999
 Doc Hollywood	1991
 Ruby	1992
-Dick Tracy	1990
+SEEN Dick Tracy 1990
 Hoffa	1992
 High Heels	1991
 8MM	1999

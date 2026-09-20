@@ -17,7 +17,9 @@ if __name__ == "__main__":
         { 'collection_name': 'Best of the Eighties', 'file_path': '/media/nas/projects/dam/plex_collections/80s_100.txt'},
         { 'collection_name': 'Best of the Nineties', 'file_path': '/media/nas/projects/dam/plex_collections/90s_200.txt'},
         { 'collection_name': 'Top Shelf Horror', 'file_path': '/media/nas/projects/dam/plex_collections/horror_200.txt'},
-    ]
+        { 'collection_name': 'Best of the Twenties', 'file_path': '/media/nas/projects/dam/plex_collections/20s_best.txt'},
+        { 'collection_name': 'Timeout Horror 100', 'file_path': '/media/nas/projects/dam/plex_collections/timeout_horror_100.txt'},
+        { 'collection_name': 'A24 Films', 'file_path': '/media/nas/projects/dam/plex_collections/a24_films.txt'}  ]
     print(f"Fetching all movies from the plex library {LIB_NAME}")
     plex_lib = fetch_plex_library(LIB_NAME)
 
@@ -37,10 +39,13 @@ if __name__ == "__main__":
             title = l[0].strip()
             year = l[1].strip()
             movie = fetch_plex_movie(title, year, plex_lib)
-            if movie and collection_name not in [c.tag for c in movie.collections]:
-                movie.addCollection(collection_name)
-            else:
-                if not movie and not title.startswith('SEEN'):
-                    print(f"{title} ({year})")
+            try:   
+                if movie and collection_name not in [c.tag for c in movie.collections]:
+                    movie.addCollection(collection_name)
+                else:
+                    if not movie and not title.startswith('SEEN'):
+                        print(f"{title} ({year})")
 
+            except Exception as e:
+                print(f"Error {e} thrown on {l}")
         print('\n\n')

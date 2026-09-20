@@ -19,7 +19,7 @@ def _fetch_libraries(type_filter:str):
 def _is_collection_in_library(library_name:str, collection_name: str):
     libraries = _fetch_libraries('movie')
     for lib in libraries:
-         if library.title == library_name:
+         if lib.title == library_name:
             matching_collections = [c for c in lib.collections() if c.title == collection_name]
             return len(matching_collections) > 0
     return False
@@ -43,6 +43,37 @@ def fetch_plex_movie(title: str, year: int, library):
         return results[0]
     else:
         return None
+
+def fetch_movies_in_collection(library_name: str, collection_name: str):
+    """
+    Returns a set of (title_lower, year) tuples for all movies in a given Plex collection.
+    Useful as a cache to quickly check if a movie is already in a collection.
+    """
+    library = fetch_plex_library(library_name, 'movie')
+    if not library:
+        return set()
+
+    collections = [c for c in library.collections() if c.title == collection_name]
+    if not collections:
+        return set()
+
+    collection = collections[0]
+    return {(movie.title.lower(), movie.year) for movie in collection.items()}
+
+def fetch_all_plex_movies(library_name: str):
+    """
+    Returns a dict keyed by (title_lower, year) for fast lookups.
+    Values are the Plex movie objects.
+    """
+    library = fetch_plex_library(library_name, 'movie')
+    if not library:
+        return {}
+
+    movie_dict = {}
+    for movie in library.all():
+        key = (movie.title.lower(), movie.year)
+        movie_dict[key] = movie
+    return movie_dict
 
 def fetch_movie_infos_from_library(lib_to_fetch: str):
     """
@@ -106,7 +137,7 @@ def update_movie_title_year_in_library(plex_title: str, plex_year: int, new_titl
             return False
 
 def add_movie_to_collection(plex_movie_title: str, collection_name: str):
-    libraries = [l for l in _fetch_libraries('movie') if is_collection_in_library(l.title, collection_name)]
+    libraries = [l for l in _fetch_libraries('movie') if _is_collection_in_library(l.title, collection_name)]
     if libraries:
         l = libraries[0]
         movie = l.get(plex_movie_title)
