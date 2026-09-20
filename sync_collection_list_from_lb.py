@@ -21,7 +21,7 @@ Usage:
 import sys
 import os
 from letterboxd_utils import parse_reviews, get_watch_status, print_review_stats
-from plex_utils import fetch_all_plex_movies
+from plex_utils import fetch_all_plex_movies, match_movie
 
 REVIEWS_PATH = '/media/nas/projects/dam/letterboxd_csv/reviews.csv'
 
@@ -86,8 +86,11 @@ def process_collection_file(file_path: str, lb_reviews: dict, plex_movies: dict,
             continue
 
         # Check if in Plex — if so, leave it alone (collection script handles it)
-        plex_key = (title.lower(), year)
-        if plex_key in plex_movies:
+        movie, confidence = match_movie(title, year, plex_movies)
+        if movie:
+            if confidence != 'exact':
+                print(f"  {confidence.upper()}: '{title}' ({year}) matched Plex's "
+                      f"'{movie.title}' ({movie.year})")
             in_plex += 1
             modified_lines.append(line)
             continue
