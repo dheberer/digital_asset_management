@@ -43,3 +43,9 @@ Scripts intended to run on a schedule (via cron):
 - For movies tagged `deleted` in Letterboxd: marks them `SEEN` across `plex_collections/*.txt` and removes them, files included, from Radarr
 
 `unpack_letterboxd_export.py` still works standalone if you just want the CSV refresh without the sync/removal steps.
+
+Run with `--dry-run` to preview a pipeline run: the export is unpacked into a temp directory (leaving `letterboxd_csv/` untouched) and every step prints what it would do instead of updating Plex, editing collection files, or calling Radarr.
+
+```
+.venv/bin/python3 process_letterboxd_export.py --dry-run
+```
