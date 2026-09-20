@@ -2,10 +2,7 @@
 # This script will open a csv file (passed in on cli) that has movie titles and years and then
 # add each movie to a collection that matches the name of the file.
 
-import sys
-import os
-from mutagen.mp4 import MP4, MP4Tags
-from plex_utils import fetch_plex_library, fetch_plex_movie
+from plex_utils import fetch_all_plex_movies, match_movie
 
 if __name__ == "__main__":
     LIB_NAME = 'Movies'
@@ -21,7 +18,7 @@ if __name__ == "__main__":
         { 'collection_name': 'Timeout Horror 100', 'file_path': '/media/nas/projects/dam/plex_collections/timeout_horror_100.txt'},
         { 'collection_name': 'A24 Films', 'file_path': '/media/nas/projects/dam/plex_collections/a24_films.txt'}  ]
     print(f"Fetching all movies from the plex library {LIB_NAME}")
-    plex_lib = fetch_plex_library(LIB_NAME)
+    plex_movies = fetch_all_plex_movies(LIB_NAME)
 
     for c in COLLECTIONS:
         file_path = c['file_path']
@@ -38,13 +35,19 @@ if __name__ == "__main__":
                 continue
             title = l[0].strip()
             year = l[1].strip()
-            movie = fetch_plex_movie(title, year, plex_lib)
-            try:   
-                if movie and collection_name not in [c.tag for c in movie.collections]:
-                    movie.addCollection(collection_name)
+            if title.startswith('SEEN'):
+                continue
+
+            try:
+                movie, confidence = match_movie(title, year, plex_movies)
+                if movie:
+                    if confidence != 'exact':
+                        print(f"  {confidence.upper()}: '{title}' ({year}) matched Plex's "
+                              f"'{movie.title}' ({movie.year})")
+                    if collection_name not in [col.tag for col in movie.collections]:
+                        movie.addCollection(collection_name)
                 else:
-                    if not movie and not title.startswith('SEEN'):
-                        print(f"{title} ({year})")
+                    print(f"{title} ({year})")
 
             except Exception as e:
                 print(f"Error {e} thrown on {l}")

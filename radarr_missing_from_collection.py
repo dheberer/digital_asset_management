@@ -16,7 +16,7 @@ Usage:
 """
 
 import sys
-from plex_utils import fetch_plex_library, fetch_plex_movie, fetch_all_plex_movies
+from plex_utils import fetch_all_plex_movies, match_movie
 from radarr_utils import process_movie_list, print_results
 
 COLLECTIONS = [
@@ -76,7 +76,11 @@ if __name__ == "__main__":
             except ValueError:
                 continue
 
-            if (title.lower(), year_int) in plex_movies:
+            movie, confidence = match_movie(title, year_int, plex_movies)
+            if movie:
+                if confidence != 'exact':
+                    print(f"  {confidence.upper()}: '{title}' ({year}) matched Plex's "
+                          f"'{movie.title}' ({movie.year}) -- not adding to Radarr")
                 continue
 
             missing_movies.append((title, year_int))

@@ -1,6 +1,6 @@
 The Shining	1980
 I Saw the Devil	2010
-Audition	2000
+Audition	1999
 A Nightmare on Elm Street	1984
 Carrie	1976
 SEEN Salem's Lot 1979
@@ -54,7 +54,7 @@ The New York Ripper	1982
 It's Alive	1974
 Pumpkinhead	1988
 City of the Living Dead	1980
-Sisters	1972
+Sisters	1973
 Bride of Frankenstein	1935
 Shivers	1975
 The Sentinel	1977
@@ -104,7 +104,7 @@ Boy Eats Girl	2005
 Link	1986
 Paperhouse	1988
 Man's Best Friend	1993
-The Last Horror Movie	2003
+The Last Horror Movie	2005
 Daughters of Darkness	1971
 Jeepers Creepers	2001
 Eaten Alive	1976
@@ -120,7 +120,7 @@ Slave of the Cannibal God	1978
 Strip Nude for Your Killer	1975
 Motel Hell	1980
 Man Bites Dog	1992
-Cronos	1992
+Cronos	1993
 The Silence of the Lambs	1991
 Manhunter	1986
 Hannibal	2001
@@ -136,7 +136,7 @@ The Final Conflict	1981
 The Exorcist III	1990
 SEEN Hellbound: Hellraiser II 1988
 The Stepfather	1987
-Rabid	1977
+SEEN Rabid	1977
 Autopsia	1973
 Flesh for the Beast	2003
 Poltergeist	1982
