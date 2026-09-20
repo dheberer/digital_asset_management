@@ -1,11 +1,11 @@
 Les Vampires	1915
-Intolerance	1916
+SEEN Intolerance 1916
 The Cabinet of Dr. Caligari	1920
-Broken Blossoms	1919
-Within Our Gates	1920
+SEEN Broken Blossoms 1919
+SEEN Within Our Gates 1920
 Way Down East	1920
 Orphans of the Storm	1921
-The Phantom Carriage	1921
+SEEN The Phantom Carriage 1921
 The Smiling Madame Beudet	1922
 Dr. Mabuse, the Gambler	1922
 Nanook of the North	1922
@@ -23,7 +23,7 @@ The Thief of Bagdad	1924
 The Eagle	1925
 The Phantom of the Opera	1925
 The Battleship Potemkin	1925
-The Gold Rush	1925
+SEEN The Gold Rush 1925
 The Big Parade	1925
 Seven Chances	1925
 The Adventures of Prince Achmed	1926
@@ -53,7 +53,7 @@ Earth	1930
 Freedom for Us	1931
 Limite	1931
 Tabu	1931
-City Lights	1931
+SEEN City Lights	1931
 Dracula	1931
 Frankenstein	1931
 The Public Enemy	1931
@@ -246,7 +246,7 @@ The African Queen	1951
 A Place in the Sun	1951
 The Lavender Hill Mob	1951
 Diary of a Country Priest	1951
-The Day the Earth Stood Still	1951
+SEEN The Day the Earth Stood Still 1951
 The Quiet Man	1952
 Forbidden Games	1952
 Europa '51	1952
@@ -312,7 +312,7 @@ Bob the Gambler	1955
 All That Heaven Allows	1955
 The Man From Laramie	1955
 The Ten Commandments	1956
-The Searchers	1956
+SEEN The Searchers 1956
 The Burmese Harp	1956
 Forbidden Planet	1956
 Written on the Wind	1956
@@ -368,7 +368,7 @@ The Hole	1960
 Rocco and his Brothers	1960
 The Adventure	1960
 Breathless	1960
-Spartacus	1960
+SEEN Spartacus	1960
 The Apartment	1960
 The Housemaid	1960
 The Cloud-Capped Star	1960
@@ -407,7 +407,7 @@ The Exterminating Angel	1962
 Jules and Jim	1962
 The Manchurian Candidate	1962
 What Ever Happened to Baby Jane?	1962
-8 1/2	1963
+8½	1963
 The Birds	1963
 Passenger	1963
 The Servant	1963
@@ -522,7 +522,7 @@ Tristana	1970
 The Conformist	1970
 The Butcher	1970
 El Topo	1970
-Five Easy Pieces	1970
+SEEN Five Easy Pieces 1970
 Deep End	1970
 The Spider's Stratagem	1970
 The Ear	1970
@@ -574,7 +574,7 @@ Sleuth	1972
 Superfly	1972
 The Sting	1973
 The Mother and the Whore	1973
-High Plains Drifter	1973
+SEEN High Plains Drifter	1973
 Badlands	1973
 American Graffiti	1973
 Papillon	1973
@@ -604,7 +604,7 @@ Chinatown	1974
 A Woman Under the Influence	1974
 Young Frankenstein	1974
 The Texas Chain Saw Massacre	1974
-Blazing Saddles	1974
+SEEN  Blazing Saddles	1974
 Celine and Julie Go Boating	1974
 Ali: Fear Eats the Soul	1974
 Barry Lyndon 	1975
@@ -684,14 +684,14 @@ Atlantic City 	1980
 The Last Metro 	1980
 The Shining 	1980
 The Elephant Man 	1980
-The Big Red One 	1980
+SEEN The Big Red One 	1980
 Loulou 	1980
 Raging Bull 	1980
 Airplane! 	1980
 An American Werewolf in London 	1981
 Diva 	1981
 Raiders of the Lost Ark 	1981
-The Boat 	1981
+Das Boot	1981
 Gallipoli 	1981
 Chariots of Fire 	1981
 Body Heat 	1981
@@ -790,11 +790,11 @@ A Chinese Ghost Story 	1987
 Full Metal Jacket 	1987
 Broadcast News 	1987
 Babette's Feast 	1987
-Good Morning, Vietnam 	1987
+SEEN Good Morning, Vietnam 	1987
 Moonstruck 	1987
 Wall Street 	1987
 The Untouchables 	1987
-Red Sorghum 	1987
+Red Sorghum 	1988
 Fatal Attraction 	1987
 The Dead 	1987
 Housekeeping 	1987
@@ -836,7 +836,7 @@ Drugstore Cowboy 	1989
 The Asthenic Syndrome 	1989
 Do the Right Thing 	1989
 The Unbelievable Truth 	1989
-Roger & Me 	1989
+SEEN    Roger & Me 	1989
 Sex, Lies, and Videotape 	1989
 A City of Sadness 	1989
 Say Anything 	1989
@@ -859,7 +859,7 @@ La Belle Noiseuse 	1991
 The Rapture 	1991
 A Brighter Summer Day 	1991
 JFK 	1991
-Slacker 	1991
+Slacker 	1990
 Once Upon a Time in China 	1991
 Thelma & Louise 	1991
 My Own Private Idaho 	1991
@@ -897,7 +897,7 @@ The Wedding Banquet 	1993
 Thirty Two Short Films About Glenn Gould 	1993
 Jurassic Park 	1993
 The Age of Innocence 	1993
-The Lion King 	1994
+SEEN    The Lion King 	1994
 The Last Seduction 	1994
 The Wild Reeds 	1994
 Crumb 	1994
@@ -1074,7 +1074,7 @@ Tsotsi 	2005
 Brokeback Mountain 	2005
 Go, See, and Become 	2005
 Paradise Now 	2005
-Hidden 	2005
+Caché 	2005
 The Constant Gardener 	2005
 Pan's Labyrinth 	2006
 The Lives of Others 	2006
@@ -1104,7 +1104,7 @@ The Hurt Locker 	2008
 Slumdog Millionaire 	2008
 The Dark Knight 	2008
 Let the Right One In 	2008
-Wall-E 	2008
+SEEN    Wall-E 	2008
 The Good, the Bad, the Weird 	2008
 The Wrestler 	2008
 The Curious Case of Benjamin Button 	2008
@@ -1193,7 +1193,7 @@ Toni Erdmann 	2016
 Under the Shadow 	2016
 Manchester by the Sea 	2016
 I, Daniel Blake 	2016
-13th 	2016
+SEEN 13th 2016
 Arrival 	2016
 Moonlight 	2016
 The Handmaiden 	2016
@@ -1223,7 +1223,7 @@ Avengers: Endgame 	2019
 Portrait of a Lady on Fire 	2019
 For Sama 	2019
 Booksmart 	2019
-Once Upon a Time in Hollywood 	2019
+Once Upon a Time... in Hollywood 	2019
 The Farewell 	2019
 Joker 	2019
 Parasite 	2019
@@ -1236,7 +1236,7 @@ Rocks 	2019
 Saint Maud 	2020
 Tenet 	2020
 Ma Rainey's Black Bottom 	2020
-Soul 	2020
+SEEN    Soul 	2020
 Never Rarely Sometimes Always 	2020
 Lovers Rock 	2020
 Nomadland 	2021
