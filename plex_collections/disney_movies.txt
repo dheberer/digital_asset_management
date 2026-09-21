@@ -1,7 +1,7 @@
-Snow White and the Seven Dwarfs	1937	
-Pinocchio	1940	
-Fantasia	1940	
-The Reluctant Dragon	1941	
+Snow White and the Seven Dwarfs	1937
+Pinocchio	1940
+Fantasia	1940
+The Reluctant Dragon	1941
 Dumbo	1941
 Bambi	1942
 Saludos Amigos	1942
@@ -15,7 +15,7 @@ So Dear to My Heart	1948
 The Adventures of Ichabod and Mr. Toad	1949
 Cinderella	1950
 Alice in Wonderland	1951
-Peter Pan   1953
+Peter Pan	1953
 Lady and the Tramp	1955
 Sleeping Beauty	1959
 One Hundred and One Dalmatians	1961
@@ -70,10 +70,10 @@ Teacher's Pet	2004
 Home on the Range	2004
 The Incredibles	2004
 Pooh's Heffalump Movie	2005
-Valiant 2005
+Valiant	2005
 Chicken Little	2005
 The Wild	2006
-SEEN Cars 2006
+SEEN Cars	2006
 Meet the Robinsons	2007
 Ratatouille	2007
 Enchanted	2007
@@ -87,7 +87,7 @@ Tangled	2010
 Gnomeo & Juliet	2011
 Mars Needs Moms	2011
 Cars 2	2011
-Winnie the Pooh	2011	 
+Winnie the Pooh	2011
 Brave	2012
 Frankenweenie	2012
 Wreck-It Ralph	2012
@@ -118,9 +118,9 @@ Encanto	2021
 The Bob's Burgers Movie	2022
 Lightyear	2022
 Strange World	2022
-SEEN Elemental 2023
+SEEN Elemental	2023
 Wish	2023
 Soul	2024
 Turning Red	2022
 Luca	2021
-SEEN Inside Out 2 2024
+SEEN Inside Out 2	2024
