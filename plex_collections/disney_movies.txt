@@ -73,7 +73,7 @@ Pooh's Heffalump Movie	2005
 Valiant 2005
 Chicken Little	2005
 The Wild	2006
-SEEN Cars 2006
+SEEN Cars	2006
 Meet the Robinsons	2007
 Ratatouille	2007
 Enchanted	2007
@@ -118,9 +118,9 @@ Encanto	2021
 The Bob's Burgers Movie	2022
 Lightyear	2022
 Strange World	2022
-SEEN Elemental 2023
+SEEN Elemental	2023
 Wish	2023
 Soul	2024
 Turning Red	2022
 Luca	2021
-SEEN Inside Out 2 2024
+SEEN Inside Out 2	2024

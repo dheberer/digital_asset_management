@@ -110,8 +110,8 @@ def process_collection_file(file_path: str, lb_reviews: dict, plex_movies: dict,
             should_mark = True
 
         if should_mark:
-            # Movie was watched — prepend SEEN, drop the tab format
-            new_line = f"SEEN {title} {year_str}\n"
+            # Movie was watched — prepend SEEN, keep the tab format
+            new_line = f"SEEN {title}\t{year_str}\n"
             modified_lines.append(new_line)
             marked += 1
             rating_str_display = f" (rated {review['rating']})" if review and review.get('rating') else ""

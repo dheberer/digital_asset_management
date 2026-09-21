@@ -3,7 +3,7 @@ I Saw the Devil	2010
 Audition	1999
 A Nightmare on Elm Street	1984
 Carrie	1976
-SEEN Salem's Lot 1979
+SEEN Salem's Lot	1979
 Hellraiser	1987
 The Omen	1976
 The Exorcist	1973
@@ -13,14 +13,14 @@ Dawn of the Dead	1978
 Zombie	1979
 A Bay of Blood	1971
 The House by the Cemetery	1981
-SEEN The Last House on the Left 1972
+SEEN The Last House on the Left	1972
 Thesis	1996
 Frankenstein	1931
 The Stone Tape	1972
 Cemetery Man	1994
 Psycho	1960
 Rosemary's Baby	1968
-SEEN Blood and Black Lace 1964
+SEEN Blood and Black Lace	1964
 White Dog	1982
 Deep Red	1975
 The Day of the Beast	1995
@@ -88,10 +88,10 @@ Videodrome	1983
 Amityville Horror: The Evil Escapes	1989
 Deathouse	1972
 The Evil	1978
-SEEN Maniac Cop 1988
+SEEN Maniac Cop	1988
 Maniac Cop 2	1990
 SEEN A Nightmare on Elm Street 2: Freddy's Revenge	1985
-SEEN Wishmaster 1997
+SEEN Wishmaster	1997
 The House That Dripped Blood	1971
 SEEN The House That Screamed	1969
 Children Shouldn't Play with Dead Things	1972
@@ -134,7 +134,7 @@ Psycho II	1983
 Demons	1985
 The Final Conflict	1981
 The Exorcist III	1990
-SEEN Hellbound: Hellraiser II 1988
+SEEN Hellbound: Hellraiser II	1988
 The Stepfather	1987
 SEEN Rabid	1977
 Autopsia	1973
