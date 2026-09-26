@@ -20,7 +20,7 @@ import zipfile
 from config import get_config
 
 DEST_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'letterboxd_csv')
-WANTED_FILES = ('ratings.csv', 'reviews.csv')
+WANTED_FILES = ('ratings.csv', 'reviews.csv', 'watchlist.csv')
 
 
 def find_latest_export(export_dir: str):
@@ -33,7 +33,7 @@ def find_latest_export(export_dir: str):
 
 def extract_wanted_files(zip_path: str, dest_dir: str):
     """
-    Extracts ratings.csv and reviews.csv from the export zip (wherever they
+    Extracts ratings.csv, reviews.csv and watchlist.csv from the export zip (wherever they
     live inside it) into dest_dir, overwriting any existing copies.
     Returns the list of filenames that were extracted.
     """

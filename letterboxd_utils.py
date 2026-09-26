@@ -70,6 +70,25 @@ def parse_ratings(ratings_path: str):
     return ratings
 
 
+def parse_watchlist(watchlist_path: str):
+    """
+    Parses the Letterboxd watchlist.csv file.
+    Returns a list of (title, year) tuples in the order Letterboxd lists them
+    (oldest addition first).
+    """
+    watchlist = []
+    with open(watchlist_path, encoding='utf-8') as f:
+        for row in csv.DictReader(f):
+            title = row.get('Name', '').strip()
+            try:
+                year = int(row.get('Year', '').strip())
+            except ValueError:
+                continue
+            if title:
+                watchlist.append((title, year))
+    return watchlist
+
+
 # Tags that indicate the movie has been watched and should not be downloaded
 DELETED_TAGS = {'delete', 'deleted'}
 STREAMING_TAGS = {'hbo', 'netflix', 'amazon buy', 'youtube'}

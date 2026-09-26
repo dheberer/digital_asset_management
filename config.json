@@ -1,3 +1,10 @@
 {
-    "letterboxd_export_dir": "/media/nas/projects/dam/letterboxd_csv/export_drop"
+    "letterboxd_export_dir": "/media/nas/projects/dam/letterboxd_csv/export_drop",
+    "media_servers": ["plex"],
+    "jellyfin_url": "http://127.0.0.1:8096",
+    "jellyfin_user": "dave",
+    "jellyfin_movie_library": "Movies",
+    "jellyfin_favorite_threshold": 4.5,
+    "jellyfin_sync_tags": true,
+    "jellyfin_sync_watchlist": true
 }
