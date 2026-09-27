@@ -49,3 +49,53 @@ Run with `--dry-run` to preview a pipeline run: the export is unpacked into a te
 ```
 .venv/bin/python3 process_letterboxd_export.py --dry-run
 ```
+
+## Jellyfin
+
+`jellyfin_utils.py` is the Jellyfin counterpart to `plex_utils.py`. It uses the Jellyfin REST API directly through `requests` and needs Jellyfin 10.10 or newer.
+
+### Setup
+
+1. In Jellyfin go to **Dashboard → API Keys → +** and create a key (name it `dam`).
+2. Add the key to `tokens.json`: `{"name": "jellyfintoken", "value": "<key>"}`
+3. In `config.json`:
+
+```json
+{
+    "media_servers": ["plex", "jellyfin"],
+    "jellyfin_url": "http://127.0.0.1:8096",
+    "jellyfin_user": "dave",
+    "jellyfin_movie_library": "Movies",
+    "jellyfin_favorite_threshold": 4.5,
+    "jellyfin_sync_tags": true,
+    "jellyfin_sync_watchlist": true
+}
+```
+
+- `media_servers` sets which servers `process_letterboxd_export.py` syncs to. Use `["plex", "jellyfin"]` while you run both and `["jellyfin"]` once Plex is retired.
+- `jellyfin_user` is the Jellyfin account that gets the ratings, watched status, favorites and playlists. API keys aren't tied to a user, so it has to be named here.
+
+### Scripts
+
+```
+# Ratings, watched (with the Letterboxd watch date), favorites, plus optional tags and watchlist playlist
+.venv/bin/python3 sync_lb_to_jellyfin.py --dry-run --tags --watchlist
+
+# Jellyfin collections from plex_collections/*.txt (same lists as the Plex script)
+.venv/bin/python3 add_movies_to_jellyfin_collection.py --dry-run
+```
+
+### How Letterboxd maps to Jellyfin
+
+| Letterboxd | Jellyfin | Notes |
+|---|---|---|
+| Star rating | Per-user rating, 0–10 (stars × 2) | Saved and returned by the API, but the stock web UI doesn't display it |
+| Rating ≥ threshold | Favorite (heart) | Shown in the UI and filterable |
+| Review / diary entry | Played, dated to the watched date | |
+| Tags | `lb:<tag>` item tags | Filterable in the UI. Tags are server-wide, not per-user |
+| Watchlist | "Letterboxd Watchlist" playlist | Only includes movies you have |
+| List files | Collections | Server-wide |
+
+Jellyfin has nowhere to store review text. To see star ratings (and notes) in the UI, look at a ratings plugin such as [Jellyfin.Plugin.UserRating](https://github.com/aG00Dtime/Jellyfin.Plugin.UserRating) or [jellyfin-plugin-ratings](https://github.com/K3ntas/jellyfin-plugin-ratings). Those plugins keep their own storage, so the sync would have to call their APIs as well.
+
+Tests: `python3 test/jellyfin_utils_test.py` runs against a fake server, so no Jellyfin instance is needed.

@@ -6,8 +6,9 @@ Unpacks the newest manually-downloaded Letterboxd export from the folder
 configured as `letterboxd_export_dir` in config.json. If (and only if) a new
 export was actually unpacked, syncs the changes out:
 
-- Syncs Letterboxd star ratings to Plex ratings
-- Marks every reviewed movie as watched in Plex
+- Syncs Letterboxd star ratings, watched status (and optionally tags and
+  your watchlist) to each media server listed in `media_servers` in
+  config.json -- "plex", "jellyfin", or both. Defaults to Plex only.
 - For movies tagged 'deleted' in Letterboxd: marks them SEEN across
   plex_collections/*.txt, then removes them (and their files) from Radarr
 
@@ -28,7 +29,6 @@ import tempfile
 from config import get_config
 from unpack_letterboxd_export import find_latest_export, extract_wanted_files, DEST_DIR
 from letterboxd_utils import parse_ratings, parse_reviews, is_deleted, print_review_stats
-from plex_utils import fetch_all_plex_movies, sync_ratings_to_plex, mark_reviewed_movies_watched
 from radarr_utils import fetch_radarr_movies, remove_movie
 from sync_collection_list_from_lb import COLLECTIONS as COLLECTION_FILES, process_collection_file
 
@@ -67,23 +67,42 @@ if __name__ == "__main__":
         lb_reviews = parse_reviews(os.path.join(dest_dir, 'reviews.csv'))
         print_review_stats(lb_reviews)
 
-        print("\nFetching Plex library...")
-        plex_movies = fetch_all_plex_movies('Movies')
-        print(f"Found {len(plex_movies)} movies in Plex")
+        media_servers = get_config('media_servers', ['plex'])
+        library_movies = None  # used below to decide what's already on disk
 
-        print("\nSyncing ratings to Plex...")
-        rating_results = sync_ratings_to_plex(plex_movies, lb_ratings, dry_run=dry_run)
-        print(f"  Synced: {rating_results['synced']}  "
-              f"Already rated: {rating_results['already_rated']}  "
-              f"Not in Plex: {rating_results['not_in_plex']}  "
-              f"Errors: {rating_results['errors']}")
+        if 'jellyfin' in media_servers:
+            import sync_lb_to_jellyfin
+            from jellyfin_utils import get_client, fetch_all_jellyfin_movies
+            jf_client = get_client()
+            print("\nFetching Jellyfin library...")
+            jf_movies = fetch_all_jellyfin_movies(jf_client, get_config('jellyfin_movie_library', 'Movies'))
+            print(f"Found {len(jf_movies)} movies in Jellyfin")
+            sync_lb_to_jellyfin.run(dest_dir, dry_run=dry_run,
+                                    tags=get_config('jellyfin_sync_tags', False),
+                                    watchlist=get_config('jellyfin_sync_watchlist', False),
+                                    jf_movies=jf_movies, client=jf_client)
+            library_movies = jf_movies
 
-        print("\nMarking reviewed movies as watched in Plex...")
-        watched_results = mark_reviewed_movies_watched(plex_movies, lb_reviews, dry_run=dry_run)
-        print(f"  Marked: {watched_results['marked']}  "
-              f"Already watched: {watched_results['already_watched']}  "
-              f"Not in Plex: {watched_results['not_in_plex']}  "
-              f"Errors: {watched_results['errors']}")
+        if 'plex' in media_servers:
+            from plex_utils import fetch_all_plex_movies, sync_ratings_to_plex, mark_reviewed_movies_watched
+            print("\nFetching Plex library...")
+            plex_movies = fetch_all_plex_movies('Movies')
+            print(f"Found {len(plex_movies)} movies in Plex")
+            library_movies = plex_movies
+
+            print("\nSyncing ratings to Plex...")
+            rating_results = sync_ratings_to_plex(plex_movies, lb_ratings, dry_run=dry_run)
+            print(f"  Synced: {rating_results['synced']}  "
+                  f"Already rated: {rating_results['already_rated']}  "
+                  f"Not in Plex: {rating_results['not_in_plex']}  "
+                  f"Errors: {rating_results['errors']}")
+
+            print("\nMarking reviewed movies as watched in Plex...")
+            watched_results = mark_reviewed_movies_watched(plex_movies, lb_reviews, dry_run=dry_run)
+            print(f"  Marked: {watched_results['marked']}  "
+                  f"Already watched: {watched_results['already_watched']}  "
+                  f"Not in Plex: {watched_results['not_in_plex']}  "
+                  f"Errors: {watched_results['errors']}")
 
         deleted_movies = [
             (review['title'], review['year'])
@@ -96,7 +115,7 @@ if __name__ == "__main__":
             print("\nMarking deleted movies SEEN across plex_collections/*.txt...")
             for file_path in COLLECTION_FILES:
                 if os.path.exists(file_path):
-                    process_collection_file(file_path, lb_reviews, plex_movies, dry_run=dry_run)
+                    process_collection_file(file_path, lb_reviews, library_movies or {}, dry_run=dry_run)
 
             print("\nRemoving deleted movies from Radarr (deleting files)...")
             radarr_cache = fetch_radarr_movies(use_cache=False)
